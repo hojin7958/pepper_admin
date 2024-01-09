@@ -11,10 +11,11 @@ db = deta.Base("MacAddress")
 
 
 check_date = st.date_input("날짜를 선택해주세요",datetime.now())
+print(check_date)
 
 if check_date:
     temp = db.fetch(query={'datetime?contains':f'{check_date}'}).items
-    if len(temp)>1:
+    if len(temp)>=1:
         df = pd.DataFrame(temp)
         df_count = df.groupby(['Mac']).count()
         macs= df['Mac'].unique().tolist()
